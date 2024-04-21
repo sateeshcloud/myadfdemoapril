@@ -1,0 +1,84 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "azuredemofactory34"
+		},
+		"AmazonS31_secretAccessKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'secretAccessKey' of 'AmazonS31'"
+		},
+		"linksource_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linksource'"
+		},
+		"newls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'newls'"
+		},
+		"targetblob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'targetblob'"
+		},
+		"targetlink_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'targetlink'"
+		},
+		"AmazonS31_properties_typeProperties_accessKeyId": {
+			"type": "string",
+			"defaultValue": "AKIAZWMRXXWR6INVNSPM"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "azuredemofactory34_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AmazonS31_secretAccessKey": {
+						"value": "[parameters('AmazonS31_secretAccessKey')]"
+					},
+					"linksource_connectionString": {
+						"value": "[parameters('linksource_connectionString')]"
+					},
+					"newls_connectionString": {
+						"value": "[parameters('newls_connectionString')]"
+					},
+					"targetblob_connectionString": {
+						"value": "[parameters('targetblob_connectionString')]"
+					},
+					"targetlink_connectionString": {
+						"value": "[parameters('targetlink_connectionString')]"
+					},
+					"AmazonS31_properties_typeProperties_accessKeyId": {
+						"value": "[parameters('AmazonS31_properties_typeProperties_accessKeyId')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
